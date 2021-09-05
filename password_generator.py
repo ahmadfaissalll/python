@@ -1,15 +1,15 @@
 # PASSSWORD GENERATOR
 
-# LIBRARY YANG DIGUNAKAN UNTUK MEN-GENERARATE WORDLIST
+# LIBRARY YANG DIGUNAKAN UNTUK ME-RANDOM WORDLIST
 import random
 # LIBRARY YANG DIGUNAKAN UNTUK MENGECEK FILE
 import os
 
 # WORDLIST
-names = """q w e r t y u i o p a s d f g h j k l m z x c v b n Q W E R T Y U I O P A S D F G H J K L M Z X C V B N
+char = """q w e r t y u i o p a s d f g h j k l m z x c v b n Q W E R T Y U I O P A S D F G H J K L M Z X C V B N
          1 2 3 4 5 6 7 8 9 0 - _ ~ `! @ # $ % ^ & * ( )"""
 # UNTUK MENGUBAH STRING DIATAS MENJADI LIST
-names = names.split()
+char = char.split()
 
 # STORE HASIL PASSWORD DISINI
 result = str()
@@ -23,19 +23,12 @@ a = 1
 def generator():
     # FOR LOOPS UNTUK MEN-GENERATE PASSWORD DAN MENYIMPAN HASILNYA DI VARIABLE 'result'
     for x in range(1, 9):
-        # AGAR SESUAI DENGAN JUMLAH ITEM DI LIST 'names' MENURUT INDEX
-        index = len(names) - 1
-        # ME-RANDOM ANGKA SEBANYAK INDEX ITEM DI LIST 'names'
-        _random = random.randint(1, index)
-        # MENGHAPUS ITEM YANG TELAH DI-RANDOM DAN ME-RETURNNYA (TUJUAN CODE INI ADALAH AGAR ITEM
-        # YANG TELAH DI RANDOM BISA DITAMBAHKAN KE VARIABLE 'result' (VARIABLE UNTUK MENYIMPAN HASIL PASSWORD))
-        y = names.pop(_random)
-        # MEMASUKKAN KEMBALI ITEM YANG TELAH DIHAPUS DI ATAS KE LIST (AGAR ITEM TIDAK BERKURANG)
-        names.insert(_random, y)
+        # ME-RANDOM ITEM LIST 'char'
+        _random = random.choice(char)
         # UNTUK MEMBUAT PERUBAHAN KE GLOBAL VARIABLE
         global result
         # MENAMBAHKAN NILAI VARIABLE 'y' KE VARIABLE 'result'
-        result += y
+        result += _random
 
 
 # TITLE
@@ -73,7 +66,7 @@ while option_input.lower() == "terminal":
             # UNTUK MENULIS BARIS KOSONG (UNTUK JARAK) PADA LOOP PERTAMA (HANYA DIEKSEKUSI SEKALI)
             if a == 1:
                 print("")
-            # CALLING GENERATOR FUNCTION
+            # CALLING FUNCTION YANG BERNAMA GENERATOR
             generator()
             # PRINT HASIL
             print(f"  {a}. {result}")
@@ -84,8 +77,8 @@ while option_input.lower() == "terminal":
         else:
             a = 1
     # JIKA TERJADI ERROR PADA PROGRAM DI ATAS MAKA INI AKAN DIEKSEKUSI
-    except:
-        print("\n\tinput tidak valid!!! jangan masukkan selain angka".upper())
+    except ValueError:
+        print("\n\t  input tidak valid!!! jangan masukkan selain angka".upper())
 
 
 # PROGRAM UNTUK MENULIS HASIL DI NOTEPAD
@@ -102,7 +95,7 @@ if option_input.lower() == "notepad":
                 if os.path.exists("password_result.txt"):
                     # JIKA FILE ADA MAKA HAPUS FILE
                     os.remove("password_result.txt")
-            # CALLING GENERATOR FUNCTION
+            # CALLING FUNCTION YANG BERNAMA GENERATOR
             generator()
             # MENULIS KE NOTEPAD
             f = open("password_result.txt", "a")
@@ -115,6 +108,6 @@ if option_input.lower() == "notepad":
         else:
             print("\n  Written Done")
 
-    # JIKA TERJADI ERROR PADA PROGRAM DI ATAS MAKA INI AKAN DIEKSEKUSI
+    # JIKA TERJADI ERROR PADA PROGRAM DI ATAS MAKA PENANGANANNYA DISERAHKAN KE SINI
     except:
         print("\n  input tidak valid".title())
