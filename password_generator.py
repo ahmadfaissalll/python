@@ -11,25 +11,17 @@ char = """q w e r t y u i o p a s d f g h j k l m z x c v b n Q W E R T Y U I O 
 # UNTUK MENGUBAH STRING DIATAS MENJADI LIST
 char = char.split()
 
-# STORE HASIL PASSWORD DISINI
-result = str()
-
-# LOOP COUNTER
-a = 1
-
-
 # GENERATOR FUNCTION
 
 def generator():
-    # FOR LOOPS UNTUK MEN-GENERATE PASSWORD DAN MENYIMPAN HASILNYA DI VARIABLE 'result'
-    for x in range(1, 9):
-        # ME-RANDOM ITEM LIST 'char'
-        _random = random.choice(char)
-        # UNTUK MEMBUAT PERUBAHAN KE GLOBAL VARIABLE
-        global result
-        # MENAMBAHKAN NILAI VARIABLE 'y' KE VARIABLE 'result'
-        result += _random
-
+    # ME-RANDOM ITEM LIST 'char' DAN ME-RETURN SEBANYAK 8 CHARARACTER
+    _random = random.choices(char, k=8)
+    # MERUBAH TYPE LIST DARI RETURN VARIABLE DI ATAS MENJADI STRING
+    _random = "".join(_random)
+    # UNTUK MEMBUAT PERUBAHAN KE GLOBAL VARIABLE
+    global result
+    # MENAMBAHKAN NILAI VARIABLE 'y' KE VARIABLE 'result'
+    result += _random
 
 # TITLE
 print("\n\tPASSWORD GENERATOR\n")
@@ -45,9 +37,16 @@ while option_input != "terminal" or option_input != "notepad":
     if option_input.lower() == "terminal" or option_input.lower() == "notepad":
         # UNTUK MEN-STOP WHILE LOOPS
         break
-    # JIKA INPUT TIDAK SAMA DENGAN 'terminal ATAU 'notepad' MAKA CODE INI AKAN DIEKSEKUSI
+    # JIKA INPUT TIDAK SAMA DENGAN 'terminal ATAU 'notepad' MAKA CODE INI KAAN DIEKSEKUSI
     elif option_input != "terminal" or option_input != "notepad":
         print("\n     input tidak valid!!!\n".upper())
+
+
+# STORE HASIL PASSWORD DISINI
+result = str()
+
+# LOOP COUNTER
+a = 1
 
 
 # PROGRAM UNTUK PRINT HASIL DI TERMINAL
