@@ -1,3 +1,24 @@
+# import random
+# import mouse
+
+# password_temp = ""
+
+# actually_password = "Io8_luDI"
+
+# _random = list()
+
+# while not password_temp == actually_password:
+#     password_temp = ""
+#     password = list("Io8_luDI")
+#     _random = random.choices(password, k=len(password))
+#     password_temp += "".join(_random)
+# else:
+#     # mouse.click('left')
+#     print(f"password_temp == {actually_password}")
+# list_num = [x for x in range(1,101)]
+# print(type(list_num[1]))
+# print(list_num)
+
 # PASSSWORD GENERATOR
 
 # LIBRARY YANG DIGUNAKAN UNTUK ME-RANDOM WORDLIST
@@ -11,17 +32,23 @@ char = """q w e r t y u i o p a s d f g h j k l m z x c v b n Q W E R T Y U I O 
 # UNTUK MENGUBAH STRING DIATAS MENJADI LIST
 char = char.split()
 
+
+# UNTUK MENYIMPAN INPUT LENGTH UNTUK NANTI DIAMBIL OLEH FUNCTION
+length = ""
+
 # GENERATOR FUNCTION
+
 
 def generator():
     # ME-RANDOM ITEM LIST 'char' DAN ME-RETURN SEBANYAK 8 CHARARACTER
-    _random = random.choices(char, k=8)
+    _random = random.choices(char, k=int(length))
     # MERUBAH TYPE LIST DARI RETURN VARIABLE DI ATAS MENJADI STRING
     _random = "".join(_random)
     # UNTUK MEMBUAT PERUBAHAN KE GLOBAL VARIABLE
     global result
     # MENAMBAHKAN NILAI VARIABLE 'y' KE VARIABLE 'result'
     result += _random
+
 
 # TITLE
 print("\n\tPASSWORD GENERATOR\n")
@@ -42,6 +69,30 @@ while option_input != "terminal" or option_input != "notepad":
         print("\n     input tidak valid!!!\n".upper())
 
 
+# INPUT LENGTH
+# SELAMA TERJADI ERROR MAKA LENGTH AKAN DIKOSONGKAN DAN SELAMA LENGTH KOSONG MAKA INI AKAN TERUS DIEKSEKUSI
+while length == "":
+    # COBA INI
+    try:
+        # USER INPUT
+        length_input = input("\n  Length:(type 'quit' to exit) ")
+        if length_input.lower() == "quit":
+            break
+        # MENG-CONVERT STRING MENJADI INTEGER JIKA USER INPUT SELAIN ANGKA MAKA AKAN TERJADI ERROR
+        int(length_input)
+        # JIKA TIDAK TERJADI ERROR PADA PROGRAM DI ATAS MAKA USER INPUT AKAN DITAMBAHKAN KE VARIABLE 'length'
+        # UNTUK DIPAKAI OLEH FUNCTION NANTINYA
+        length += str(length_input)
+
+    # JIKA TERJADI ERROR PADA PROGRAM DI ATAS MAKA TANGANI DENGAN INI
+    except:
+        # VARIABLE 'length' AKAN DIKOSONGKAN SEHINGGA LOOPS AKAN TERUS BERJALAN
+        # TIDAK AKAN BERHENTI SAMPE USER HANYA MENGINPUT ANGKA
+        length = ""
+        # AND LAST PRINT INI
+        print("\n\tinput tidak valid!!!".upper())
+
+
 # STORE HASIL PASSWORD DISINI
 result = str()
 
@@ -52,11 +103,12 @@ a = 1
 # PROGRAM UNTUK PRINT HASIL DI TERMINAL
 
 # JIKA INPUT SAMA DENGAN 'terminal' KETIKA HURUF INPUT DIRUBAH KE HURUF KECIL DENGAN METHOD '.lower()' MAKA PROGRAM INI AKAN DIEKSEKUSI
-while option_input.lower() == "terminal":
+while option_input.lower() == "terminal" and length_input.lower() != "quit":
     # COBA EKSEKUSI INI TAPI JIKA TERJADI ERROR MAKA 'except' YANG AKAN MENANGANINYA
     try:
         # HOW MUCH DO YOU WANNA GENERATE (THIS IS USER INPUT)
-        numb_input = input("\n\tHow much do you wanna generate:(type 'quit' to exit) ")
+        numb_input = input(
+            "\n\tHow much do you wanna generate:(type 'quit' to exit) ")
         # UNTUK KELUAR DARI PROGRAM
         if numb_input.lower() == "quit":
             break
@@ -76,19 +128,21 @@ while option_input.lower() == "terminal":
         else:
             a = 1
     # JIKA TERJADI ERROR PADA PROGRAM DI ATAS MAKA INI AKAN DIEKSEKUSI
-    except ValueError:
+    except:
         print("\n\t  input tidak valid!!! jangan masukkan selain angka".upper())
 
 
 # PROGRAM UNTUK MENULIS HASIL DI NOTEPAD
 
 # JIKA INPUT SAMA DENGAN 'terminal' KETIKA HURUF INPUT DIRUBAH KE HURUF KECIL DENGAN METHOD '.lower()' MAKA PROGRAM INI AKAN DIEKSEKUSI
-if option_input.lower() == "notepad":
+if option_input.lower() == "notepad" and length_input.lower() != "quit":
+    # COBA INI
     try:
         # HOW MUCH DO YOU WANNA GENERATE (THIS IS USER INPUT)
-        numb_input = int(input("\n\tHow much do you wanna generate: "))
+        numb_input = input("\n\tHow much do you wanna generate: ")
+        # UNTUK KELUAR DARI PROGRAM
         # INI AKAN DIEKSEKUSI SAMPAI LOOP COUNTER ('a') SAMA DENGAN 'numb_input'
-        while a <= numb_input:
+        while a <= int(numb_input):
             # UNTUK MENGECEK FILE PADA LOOP PERTAMA (HANYA DIEKSEKUSI SEKALI)
             if a == 1:
                 if os.path.exists("password_result.txt"):
