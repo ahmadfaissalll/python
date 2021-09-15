@@ -4,6 +4,7 @@
 import random
 # LIBRARY YANG DIGUNAKAN UNTUK MENGECEK FILE
 import os
+
 import sys
 
 # WORDLIST
@@ -61,6 +62,7 @@ while length == "":
         # int(length_input)
         elif int(length_input) < 1:
             length_input = ""
+            print("\n\tinput tidak valid!!! jangan masukkan angka di bawah 1".upper())
         # JIKA TIDAK TERJADI ERROR PADA PROGRAM DI ATAS MAKA USER INPUT AKAN DITAMBAHKAN KE VARIABLE 'length'
         # UNTUK DIPAKAI OLEH FUNCTION NANTINYA
         length += str(length_input)
@@ -112,7 +114,7 @@ if option_input.lower() == "terminal" and length_input != "quit":
                 a = 1
         # JIKA TERJADI ERROR PADA PROGRAM DI ATAS MAKA INI AKAN DIEKSEKUSI
         except:
-            print("\n\t  input tidak valid!!! jangan masukkan selain angka atau angka dibawah 1".upper())
+            print("\n\t  input tidak valid!!! jangan masukkan selain angka atau angka di bawah 1".upper())
 
 
 # PROGRAM UNTUK MENULIS HASIL DI NOTEPAD
@@ -121,28 +123,36 @@ if option_input.lower() == "terminal" and length_input != "quit":
 if option_input.lower() == "notepad" and length_input.lower() != "quit":
     # COBA INI
     try:
+        temp = ""
         # HOW MUCH DO YOU WANNA GENERATE (THIS IS USER INPUT)
-        numb_input = input("\n\tHow much do you wanna generate: ")
-        # INI AKAN DIEKSEKUSI SAMPAI LOOP COUNTER ('a') SAMA DENGAN 'numb_input'
-        while a <= int(numb_input):
-            # UNTUK MENGECEK FILE PADA LOOP PERTAMA (HANYA DIEKSEKUSI SEKALI)
-            if a == 1:
-                if os.path.exists("password_result.txt"):
-                    # JIKA FILE ADA MAKA HAPUS FILE
-                    os.remove("password_result.txt")
-            # CALLING FUNCTION YANG BERNAMA GENERATOR
-            generator()
-            # MENULIS KE NOTEPAD
-            f = open("password_result.txt", "a")
-            f.write(f"{a}. {result}\n")
-            # MENGOSONGKAN NILAI VARIABLE 'result' UNTUK MENYIMPAN HASIL LOOPS BERIKUTNYA
-            result = ""
-            # UNTUK MENAMBAHKAN NILAI 1 KE VARIABLE 'a' DI SETIAP LOOPS ( JIKA INI DIHAPUS MAKA PROGRAM TIDAK AKAN BERHENTI (INFINITY LOOPS) )
-            a += 1
-        # INI AKAN DIEKSEKUSI KETIKA LOOPS SELESAI
-        else:
-            print("\n  Written Done")
+        while temp == "":
+            numb_input2 = input("\n\tHow much do you wanna generate: ")
+            # JIKA INPUT KURANG DARI 1 MAKA INI AKAN DIEKSEKUSI
+            if int(numb_input2) <= 0:
+                print("\n\ttidak menerima angka di bawah 1!!!".upper())
+            else:
+                # CONCATENATE temp DENGAN num_input2 AGAR WHILE PARENT LOOPS BERHENTI DAN CHILDS LOOPS BERJALAN TANPA INFINITE
+                temp += numb_input2
+                # INI AKAN DIEKSEKUSI SAMPAI LOOP COUNTER ('a') SAMA DENGAN 'numb_input'
+                while a <= int(numb_input2):
+                    # UNTUK MENGECEK FILE PADA LOOP PERTAMA (HANYA DIEKSEKUSI SEKALI)
+                    if a == 1:
+                        if os.path.exists("password_result.txt"):
+                            # JIKA FILE ADA MAKA HAPUS FILE
+                            os.remove("password_result.txt")
+                    # CALLING FUNCTION YANG BERNAMA GENERATOR
+                    generator()
+                    # MENULIS KE NOTEPAD
+                    f = open("password_result.txt", "a")
+                    f.write(f"{a}. {result}\n")
+                    # MENGOSONGKAN NILAI VARIABLE 'result' UNTUK MENYIMPAN HASIL LOOPS BERIKUTNYA
+                    result = ""
+                    # UNTUK MENAMBAHKAN NILAI 1 KE VARIABLE 'a' DI SETIAP LOOPS ( JIKA INI DIHAPUS MAKA PROGRAM TIDAK AKAN BERHENTI (INFINITY LOOPS) )
+                    a += 1
+                    # INI AKAN DIEKSEKUSI KETIKA LOOPS SELESAI
+                else:
+                    print("\n  Written Done")
 
-    # JIKA TERJADI ERROR PADA PROGRAM DI ATAS MAKA PENANGANANNYA DISERAHKAN KE SINI
+# JIKA TERJADI ERROR PADA PROGRAM DI ATAS MAKA PENANGANANNYA DISERAHKAN KE SINI
     except:
-        print("\n  input tidak valid".title())
+        print("\n  input tidak valid!!!".title())
