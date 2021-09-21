@@ -1,11 +1,12 @@
-# COUNTDOWN TIMER SEDERHANA
-
 import time
 import keyboard
 
-hour = time.localtime().tm_hour
-minute = list(str(time.localtime().tm_min))
-second = time.localtime().tm_sec
+tm = time.localtime()
+
+hour = tm.tm_hour
+minute = list(str(tm.tm_min))
+second = tm.tm_sec
+
 
 if len(minute) == 1:
     minute.insert(0,'0')
@@ -13,17 +14,17 @@ if len(minute) == 1:
 # TIPE DATA VARIABEL minute DIRUBAH DARI LIST MENJADI STRING
 minute = "".join(minute)
 
-# PR → NEXT TAMBAHKAN DETIK
 a = 0
 
 while True:
     a += 1
-    print(a,'second')
+    mytm = time.localtime()
+    print(f"{a} second")
     time.sleep(1)
     # TEKAN ESC SELAMA SEPERSEKIAN DETIK UNTUK MEM-STOP PROGRAM DENGAN BENAR
     if (keyboard.is_pressed('esc')):
         print(f'\ndari {hour}:{minute}:{second}')
-
+        print(f'sampe {mytm.tm_hour}:{mytm.tm_hour}:{mytm.tm_sec}')
         current_minute = (a // 60)
         current_second = (a % 60)
 
@@ -31,6 +32,6 @@ while True:
             print("\nselesai",current_minute, 'Menit', current_second,'detik')
             ##
         else: ##
-            print("\nselesai",a, "detik")
+            print(f"\nselesai {a} detik")
         ##
         break
