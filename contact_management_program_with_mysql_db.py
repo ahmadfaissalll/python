@@ -1,3 +1,6 @@
+####### ANDA HARUS MENGHUBUNGKAN PROGRAM INI KE DATABASE MYSQL SECARA TERPISAH LEWAT file 'connect_db.py' YANG TELAH SAYA SEDIAKAN ######
+####### JADI DOWNLOAD FILE ITU JUGA AGAR PROGRAM DAPAT BERJALAN ######
+
 # import class ERROR untuk memunculkan pesan error
 from mysql.connector import Error
 # untuk keluar dari program jika terjadi error saat mencoba connect ke database
