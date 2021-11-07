@@ -1,6 +1,3 @@
-####### ANDA HARUS MENGHUBUNGKAN PROGRAM INI KE DATABASE MYSQL SECARA TERPISAH LEWAT file 'connect_db.py' YANG TELAH SAYA SEDIAKAN ######
-####### JADI DOWNLOAD FILE ITU JUGA AGAR PROGRAM DAPAT BERJALAN ######
-
 # import class ERROR untuk memunculkan pesan error
 from mysql.connector import Error
 # untuk keluar dari program jika terjadi error saat mencoba connect ke database
@@ -47,11 +44,11 @@ class function:
 
 		def filter_search(x):
 			if search_by == 'nama':
-				if input_data in x[1]:
+				if x[1].startswith(input_data):
 					return True
 
 			elif search_by == 'no_telp':
-				if input_data in x[2]:
+				if x[2].startswith(input_data):
 					return True
 
 			else:
@@ -76,7 +73,7 @@ class function:
 			print(f'\nMaaf {identifier_column} {data_to_delete} tidak ada di dalam database kami')
 
 
-class Contact_management:
+class Contact_Management:
 	def __init__(self, start_app=False):
 		# jika tabel kosong maka auto increment direset kembali ke 1
 		mycursor.execute('select id from daftar_kontak limit 1')
@@ -280,4 +277,5 @@ class Contact_management:
 		else:
 			print('Daftar kontak kosong')
 
-Contact_management(start_app=True)
+# start app
+Contact_Management(start_app=True)
