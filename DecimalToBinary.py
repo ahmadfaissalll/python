@@ -1,34 +1,19 @@
 # Decimal To Binary Converter
 
-# TITLE
-print("\n\tDecimal To Binary Converter")
-# DECIMAL INPUT
-decimal_input = input("\nMasukkan angka desimal: ")
+def decimal_to_binary(decimal):
 
-# AGAR JARAK ANTARA INPUT DAN OPERASI OPERASI TIDAK BERDEKATAN
-print("")
+    decimal = int(decimal)
 
-# UNTUK MENAMPUNG ANGKA UNTUK DITAMPILKAN DI AKHIR
-decimal_result = decimal_input
-numbers = ""
+    result = ''
 
-# LOGIKA OPERASI
-try:
-    while int(decimal_input) > 0:
-        operasi1 = int(decimal_input) // 2
-        operasi2 = int(decimal_input) % 2
-        numbers += str(operasi2)
-        print(f"{decimal_input} / 2 = {operasi1} sisa bagi = {operasi2}")
-        decimal_input = int(decimal_input)
-        decimal_input //= 2
+    while ( decimal ):
+        result += str(decimal % 2)
+        decimal //= 2
 
-except ValueError:
-    raise Exception("Input tidak valid!!!".upper())
+    while ( len(result) < 8 ):
+        result += '0'
 
-# AGAR URUTANNYA BENAR
-numbers = list(numbers)
-numbers.reverse()
-numbers = "".join(numbers)
+    return result[::-1]
 
-# HASIL AKHIR
-print(f"\n{decimal_result} in decimal = {numbers} in binary")
+
+print('\nBinary:','.'.join(map(decimal_to_binary, input('Decimal: ').split('.'))))
