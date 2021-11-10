@@ -184,19 +184,17 @@ class Contact_Management:
 		sure = input('Anda yakin ingin menghapus semua kontak (yes/no)? ')
 
 		# validation
-		if ( sure.lower() != 'yes' and sure.lower() != 'no' ):
-			print('\nInput tidak valid')
-			return False
+		if ( sure.lower() == 'yes' ):
+			mycursor.execute('delete from daftar_kontak')
+			jumlah_kontak_dihapus = mycursor.rowcount
+			mydb.commit()
+			print('\n' + str(jumlah_kontak_dihapus), 'Kontak berhasil dihapus')
+
+		elif ( sure.lower() == 'no' ):
+			print('\nPenghapusan dibatalkan')
 
 		else:
-			if ( sure.lower() == 'yes' ):
-				mycursor.execute('delete from daftar_kontak')
-				jumlah_kontak_dihapus = mycursor.rowcount
-				mydb.commit()
-				print('\n' + str(jumlah_kontak_dihapus), 'Kontak berhasil dihapus')
-
-			else:
-				print('\nPenghapusan dibatalkan')
+			print('\nInput tidak valid')
 
 	# option 3
 	def edit_kontak(self):
