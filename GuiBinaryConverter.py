@@ -24,7 +24,7 @@ def binary_to_decimal(binary):
 
     decimal_result = 0
 
-    for bit in binary[::-1]:
+    for bit in binary:
         decimal_result += int(bit) * (pow(2, pangkat))
         pangkat -= 1
 
